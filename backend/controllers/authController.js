@@ -108,6 +108,19 @@ class AuthController {
       res.status(500).json({ message: "Internal server error" });
     }
   }
+
+  static async logout(req, res) {
+    try {
+      res.cookie("jwt", "", {
+        maxAge: 0,
+      });
+
+      res.status(200).json({ message: "Logged out successfully" });
+    } catch (error) {
+      console.error("Logout error", error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  }
 }
 
 export default AuthController;
