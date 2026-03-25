@@ -40,7 +40,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSwitch }) => {
     onSuccess: (data) => {
       const { user } = data;
       setUser(user);
-      queryClient.setQueryData(["auth"], user);
+      queryClient.setQueryData(["auth"], data);
       toast.success("Login Successfull!");
       navigate("/");
     },
