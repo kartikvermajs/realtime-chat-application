@@ -6,5 +6,7 @@ export function useAuth() {
     queryKey: ["auth"],
     queryFn: authService.me,
     retry: false,
+    staleTime: 5 * 60 * 1000,
+    throwOnError: false,
   });
 }
