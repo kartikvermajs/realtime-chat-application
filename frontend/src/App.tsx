@@ -10,7 +10,7 @@ const App: React.FC = () => {
         <Route path="/auth" element={<Auth />} />
         <Route path="/chat" element={<Chat />} />
       </Routes>
-      <Toaster />
+      <Toaster richColors position="top-right" />
     </>
   );
 };

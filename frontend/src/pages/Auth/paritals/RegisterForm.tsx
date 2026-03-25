@@ -16,7 +16,7 @@ const registerSchema = z
     fullName: z.string().trim().min(2, { message: "Full name is too short" }),
     username: z
       .string()
-      .regex(/^[a-z0-0_]+$/)
+      .regex(/^[a-z0-9_]+$/)
       .min(2, { message: "Username is too short" })
       .max(12, { message: "Username is too long" })
       .transform((val) => val.toLocaleLowerCase()),
@@ -173,7 +173,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSwitch }) => {
 
       <div className="text-center text-sm mt-4">
         <span className="text-gray-600">Already have an account? </span>
-        <span className="text-primary font-medium  cursor-pointer hover:underline">
+        <span onClick={onSwitch} className="text-primary font-medium  cursor-pointer hover:underline">
           Sign In
         </span>
       </div>

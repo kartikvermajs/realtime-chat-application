@@ -4,7 +4,7 @@ import LoginForm from "./paritals/LoginForm";
 import RegisterForm from "./paritals/RegisterForm";
 
 const Auth: React.FC = () => {
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
 
   return (
     <>
