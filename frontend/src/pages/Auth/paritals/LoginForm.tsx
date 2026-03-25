@@ -3,7 +3,7 @@ import { z } from "zod";
 import { useAuthStore } from "../../../store/authStore";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { authService } from "../../../services/authService";
 import { toast } from "sonner";
 import axios from "axios";
@@ -25,6 +25,7 @@ type LoginForm = z.infer<typeof loginSchema>;
 const LoginForm: React.FC<LoginFormProps> = ({ onSwitch }) => {
   const navigate = useNavigate();
   const { setUser } = useAuthStore();
+  const queryClient = useQueryClient();
 
   const {
     register,
@@ -39,8 +40,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSwitch }) => {
     onSuccess: (data) => {
       const { user } = data;
       setUser(user);
+      queryClient.setQueryData(["auth"], user);
       toast.success("Login Successfull!");
-      return navigate("/");
+      navigate("/");
     },
     onError: (error) => {
       const msg = axios.isAxiosError(error)
