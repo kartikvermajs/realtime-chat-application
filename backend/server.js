@@ -17,10 +17,11 @@ app.use(
     credentials: true,
   }),
 );
-app.use("/api/auth", authRoutes);
+app.use(cookieParser());
+app.use(express.json());
 
 //routes
-app.use(cookieParser);
+app.use("/api/auth", authRoutes);
 
 try {
   await connectDB();

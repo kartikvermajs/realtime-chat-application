@@ -24,7 +24,7 @@ class AuthController {
 
       //hash password
       const salt = await bcrypt.genSalt(10);
-      const hashedPassword = await bcrypt.hash(password, slat);
+      const hashedPassword = await bcrypt.hash(password, salt);
 
       const user = new User({
         username,
@@ -57,7 +57,7 @@ class AuthController {
 
       const isValidPassword = await bcrypt.compare(password, user.password);
       if (!isValidPassword) {
-        return res.staus(400).json({ message: "Invalid credentials" });
+        return res.status(400).json({ message: "Invalid credentials" });
       }
 
       const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
