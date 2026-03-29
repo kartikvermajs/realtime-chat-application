@@ -47,7 +47,8 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSwitch }) => {
   const mutation = useMutation({
     mutationFn: authService.register,
     onSuccess: () => {
-      (onSwitch(), toast.success("Account Created! You can now signin!"));
+      onSwitch();
+      toast.success("Account Created! You can now signin!");
     },
     onError: (error: AxiosError<{ message: string }>) => {
       const msg = error.response?.data?.message || "Registration failed";

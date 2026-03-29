@@ -31,11 +31,13 @@ conversationSchema.index(
   { unique: true },
 );
 
-conversationSchema.pre("save", function (next) {
+conversationSchema.pre("save", async function () {
   if (this.participants && this.participants.length === 2) {
-    this.participants = this.participants.map((p) => p.toString()).sort();
+    this.participants = this.participants
+      .map((p) => p.toString())
+      .sort()
+      .map((p) => new mongoose.Types.ObjectId(p));
   }
-  next();
 });
 
 export default mongoose.model("Conversation", conversationSchema);
